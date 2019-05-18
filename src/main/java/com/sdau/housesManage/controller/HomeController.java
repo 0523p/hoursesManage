@@ -62,4 +62,6 @@ public class HomeController {
         }
         return CommonTools.getResultJson(new ResultModel(ResultModel.STATUS.ERROR,"删除房产信息失败",""));
     }
+
+
 }
