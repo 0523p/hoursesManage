@@ -15,7 +15,7 @@
     delete from t_home
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.sdau.housesManage.entity.Home">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.sdau.housesManage.entity.Home">
     insert into t_home (id, storeynum, unitnum, 
       housenum, type, area, 
       address, remark)
@@ -43,4 +43,14 @@
     select id, storeynum, unitnum, housenum, type, area, address, remark
     from t_home
   </select>
+
+  <insert id="insertHomeUserLink" parameterType="java.util.Map">
+    insert into t_user_home (homeid, userid)
+    values (#{homeId}, #{userId})
+  </insert>
+
+  <delete id="deleteHomeUserLink" parameterType="java.lang.Integer">
+    delete from t_user_home
+    where homeid = #{homeId,jdbcType=INTEGER}
+  </delete>
 </mapper>
