@@ -7,26 +7,27 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="idcard" jdbcType="DOUBLE" property="idcard" />
-    <result column="phone" jdbcType="TIMESTAMP" property="phone" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="workplace" jdbcType="VARCHAR" property="workplace" />
     <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, account, password, salt, name, idcard, phone, workplace, type, remark
+    select id, account, password, salt, name, idcard, phone, workplace, type, create_time, remark
     from t_user
     where id = #{id}
   </select>
 
   <insert id="insert" parameterType="com.sdau.housesManage.entity.User">
-    insert into t_user (id, account, password, salt, name, idcard, phone, workplace, type, remark)
-    values (#{id}, #{account}, #{password}, #{salt}, #{name}, #{idcard}, #{phone}, #{workplace}, #{type}, #{remark})
+    insert into t_user (id, account, password, salt, name, idcard, phone, workplace, type, create_time, remark)
+    values (#{id}, #{account}, #{password}, #{salt}, #{name}, #{idcard}, #{phone}, #{workplace}, #{type}, #{createTime}, #{remark})
   </insert>
 
   <select id="getUserByLoginName" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select id, account, password, salt, name, idcard, phone, workplace, type, remark
+    select id, account, password, salt, name, idcard, phone, workplace, type, create_time, remark
     from t_user
     where account = #{account}
   </select>

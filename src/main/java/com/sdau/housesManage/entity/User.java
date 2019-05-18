@@ -1,5 +1,7 @@
 package com.sdau.housesManage.entity;
 
+import java.util.Date;
+
 public class User {
     private int id;
     private String account;
@@ -10,6 +12,7 @@ public class User {
     private String phone;
     private String workplace;
     private String type;
+    private Date date;
     private String remark;
 
     public int getId() {
@@ -90,5 +93,13 @@ public class User {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
