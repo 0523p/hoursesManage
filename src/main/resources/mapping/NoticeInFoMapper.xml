@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdau.housesManage.dao.NoticeInFoMapper">
+  <resultMap id="BaseResultMap" type="com.sdau.housesManage.entity.NoticeInFo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="person" jdbcType="VARCHAR" property="person" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_noticeinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sdau.housesManage.entity.NoticeInFo">
+    insert into t_noticeinfo (id, person, date, 
+      title, note, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{person,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, 
+      #{title,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdau.housesManage.entity.NoticeInFo">
+    update t_noticeinfo
+    set person = #{person,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP},
+      title = #{title,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, person, date, title, note, remark
+    from t_noticeinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, person, date, title, note, remark
+    from t_noticeinfo
+  </select>
+</mapper>

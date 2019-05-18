@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdau.housesManage.dao.MoneyInFoMapper">
+  <resultMap id="BaseResultMap" type="com.sdau.housesManage.entity.MoneyInFo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="typeid" jdbcType="INTEGER" property="typeid" />
+    <result column="money" jdbcType="VARCHAR" property="money" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="spenddate" jdbcType="TIMESTAMP" property="spenddate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_moneyinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sdau.housesManage.entity.MoneyInFo">
+    insert into t_moneyinfo (id, typeid, money, 
+      status, userid, spenddate, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{typeid,jdbcType=INTEGER}, #{money,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, #{spenddate,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sdau.housesManage.entity.MoneyInFo">
+    update t_moneyinfo
+    set typeid = #{typeid,jdbcType=INTEGER},
+      money = #{money,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=INTEGER},
+      spenddate = #{spenddate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, typeid, money, status, userid, spenddate, remark
+    from t_moneyinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, typeid, money, status, userid, spenddate, remark
+    from t_moneyinfo
+  </select>
+</mapper>
