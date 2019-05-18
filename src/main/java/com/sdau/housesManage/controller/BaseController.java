@@ -28,4 +28,16 @@ public class BaseController {
         }
         return CommonTools.getResultJson(new ResultModel(ResultModel.STATUS.ERROR,"添加失败",""));
     }
+
+
+    @RequestMapping("/updateBaseInFo")
+    public String updateBaseInFo(HttpServletRequest request) {
+        String formData = request.getParameter("formData");
+        SystemInFo systemInFo = CommonTools.jsonToObject(formData,SystemInFo.class);
+        boolean isSucess = baseService.updateBaseInFo(systemInFo);
+        if (isSucess) {
+            return CommonTools.getResultJson(new ResultModel(ResultModel.STATUS.OK,"更新成功",""));
+        }
+        return CommonTools.getResultJson(new ResultModel(ResultModel.STATUS.ERROR,"更新失败",""));
+    }
 }

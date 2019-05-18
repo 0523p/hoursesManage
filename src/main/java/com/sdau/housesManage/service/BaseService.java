@@ -22,4 +22,16 @@ public class BaseService {
         }
         return true;
     }
+
+    /**
+     * 更新小区信息
+     * @param systemInFo
+     * @return
+     */
+    public boolean updateBaseInFo(SystemInFo systemInFo) {
+        if (systemInFoMapper.updateByPrimaryKey(systemInFo) != 1) {
+            return false;
+        }
+        return true;
+    }
 }
