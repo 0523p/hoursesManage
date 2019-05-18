@@ -13,11 +13,12 @@ public interface HomeMapper {
 
     Home selectByPrimaryKey(Integer id);
 
-    List<Home> selectAll();
+    List<Map<String, Object>> selectAll(Map<String, Object> params);
 
     int updateByPrimaryKey(Home record);
 
     int insertHomeUserLink(Map<String,Object> params);
 
     int deleteHomeUserLink(Integer homeId);
+
 }

@@ -30,7 +30,7 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo( AuthenticationToken authenticationToken) throws AuthenticationException {
         String account = (String)authenticationToken.getPrincipal();
         //查出是否有此用户
-        User user = userMapper.getUserByLoginName(account);
+        User user = userMapper.getUserByAccount(account);
         if(user == null) {
             throw new UnknownAccountException();//没找到帐号
         }

@@ -10,7 +10,7 @@ public class User {
     private String name;
     private String idcard;
     private String phone;
-    private String workplace;
+    private String address;
     private String type;
     private Date createTime;
     private String remark;
@@ -71,12 +71,12 @@ public class User {
         this.phone = phone;
     }
 
-    public String getWorkplace() {
-        return workplace;
+    public String getAddress() {
+        return address;
     }
 
-    public void setWorkplace(String workplace) {
-        this.workplace = workplace;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getType() {

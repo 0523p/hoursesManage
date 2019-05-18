@@ -9,28 +9,44 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="idcard" jdbcType="VARCHAR" property="idcard" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="workplace" jdbcType="VARCHAR" property="workplace" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, account, password, salt, name, idcard, phone, workplace, type, create_time, remark
+    select id, account, password, salt, name, idcard, phone, address, type, create_time, remark
     from t_user
     where id = #{id}
   </select>
 
   <insert id="insert" parameterType="com.sdau.housesManage.entity.User">
-    insert into t_user (id, account, password, salt, name, idcard, phone, workplace, type, create_time, remark)
-    values (#{id}, #{account}, #{password}, #{salt}, #{name}, #{idcard}, #{phone}, #{workplace}, #{type}, #{createTime}, #{remark})
+    insert into t_user (id, account, password, salt, name, idcard, phone, address, type, create_time, remark)
+    values (#{id}, #{account}, #{password}, #{salt}, #{name}, #{idcard}, #{phone}, #{address}, #{type}, #{createTime}, #{remark})
   </insert>
 
-  <select id="getUserByLoginName" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select id, account, password, salt, name, idcard, phone, workplace, type, create_time, remark
+  <select id="getUserByAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, account, password, salt, name, idcard, phone, address, type, create_time, remark
     from t_user
     where account = #{account}
   </select>
 
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select id, account, name, idcard, phone, address, type, create_time, remark
+    from t_user
+    where type != '0'
+    <if test="name != null and name != ''">
+      and (name like '%${name}%' or account like '%${name}%')
+    </if>
+    <if test="number != null and number != ''">
+      and (idcard like '%${number}%' or phone like '%${number}%')
+    </if>
+    order by create_time desc
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user where id = #{id}
+  </delete>
 
 </mapper>

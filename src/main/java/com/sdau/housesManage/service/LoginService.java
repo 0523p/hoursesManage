@@ -44,7 +44,7 @@ public class LoginService {
      * @throws Exception
      */
     public void setAttr(Subject currentUser)throws Exception{
-        User user = userMapper.getUserByLoginName((String)currentUser.getPrincipal());
+        User user = userMapper.getUserByAccount((String)currentUser.getPrincipal());
         Session session = currentUser.getSession();
         session.setAttribute("user", user);
         SingletonBean.userIdSessionMaps.put(user.getId(), session);

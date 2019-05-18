@@ -2,11 +2,13 @@ package com.sdau.housesManage.service;
 
 import com.sdau.housesManage.dao.HomeMapper;
 import com.sdau.housesManage.entity.Home;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -36,13 +38,15 @@ public class HomeService {
         home.setAddress(params.get("address").toString());
         //备注
         home.setRemark(params.get("remark").toString());
-        if (homeDao.insert(home) > 0) {
-            Map<String, Object> homeUserLink = new HashMap<>();
-            homeUserLink.put("homeId", home.getId());
-            homeUserLink.put("userId", params.get("userId"));
-            homeDao.insertHomeUserLink(homeUserLink);
-            return true;
 
+        if (homeDao.insert(home) > 0) {
+            if (Strings.isNotBlank((String) params.get("userId"))) {
+                Map<String, Object> homeUserLink = new HashMap<>();
+                homeUserLink.put("homeId", home.getId());
+                homeUserLink.put("userId", params.get("userId"));
+                return homeDao.insertHomeUserLink(homeUserLink) > 0;
+            }
+            return true;
         }
         return false;
     }
@@ -72,15 +76,13 @@ public class HomeService {
         homeDao.updateByPrimaryKey(home);
         //删除关联关系重新添加
         homeDao.deleteHomeUserLink(home.getId());
-        if (homeDao.insert(home) > 0) {
+        if (Strings.isNotBlank((String) params.get("userId"))) {
             Map<String, Object> homeUserLink = new HashMap<>();
             homeUserLink.put("homeId", home.getId());
             homeUserLink.put("userId", params.get("userId"));
-            homeDao.insertHomeUserLink(homeUserLink);
-            return true;
-
+            return homeDao.insertHomeUserLink(homeUserLink) > 0;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -96,5 +98,13 @@ public class HomeService {
         //删除关系
         homeDao.deleteHomeUserLink(id);
         return true;
+    }
+
+    public List<Map<String, Object>> selectAll(Map<String, Object> params) {
+        return homeDao.selectAll(params);
+    }
+
+    public Home selectByPrimaryKey(int id) {
+        return homeDao.selectByPrimaryKey(id);
     }
 }
