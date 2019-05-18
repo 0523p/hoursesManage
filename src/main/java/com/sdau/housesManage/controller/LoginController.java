@@ -27,13 +27,13 @@ public class LoginController {
 
     /**
      * 登陆
-     * @param loginName
+     * @param account
      * @param password
      * @return
      */
     @RequestMapping("/userLogin")
-    public String userLogin(String loginName, String password) {
-        UsernamePasswordToken token = new UsernamePasswordToken(loginName,password);
+    public String userLogin(String account, String password) {
+        UsernamePasswordToken token = new UsernamePasswordToken(account, password);
         //获取当前对象
         Subject currentUser = SecurityUtils.getSubject();
         if(currentUser.isAuthenticated()){
@@ -44,7 +44,7 @@ public class LoginController {
         try{
             //验证登录是否成功  不成功直接抛异常
             currentUser.login(token);
-            loginService.beforeLogin(loginName);
+            loginService.beforeLogin(account);
             loginService.setAttr(currentUser);
         }catch (UnknownAccountException e) {
             //用户名没有找到

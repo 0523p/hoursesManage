@@ -18,7 +18,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-aop')
-	implementation group: 'com.alipay.sdk', name: 'alipay-sdk-java', version: '3.6.0.ALL'
 	compile group: 'com.github.pagehelper', name: 'pagehelper', version: '5.1.2'
 	compile group: 'com.github.pagehelper', name: 'pagehelper-spring-boot-starter', version: '1.2.3'
 	compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.2.4'

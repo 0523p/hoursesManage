@@ -12,7 +12,7 @@ public class User {
     private String phone;
     private String workplace;
     private String type;
-    private Date date;
+    private Date createTime;
     private String remark;
 
     public int getId() {
@@ -95,11 +95,11 @@ public class User {
         this.remark = remark;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

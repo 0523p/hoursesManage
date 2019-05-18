@@ -20,15 +20,6 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        String loginName = (String)super.getAvailablePrincipal(principalCollection);
-        //到数据库查是否有此对象
-        /*User user =  userMapper.findByLoginName( loginName );
-        if(user!=null){
-            //权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）
-            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-            // info.setRoles(this.findAllRoles(loginName)); //// TODO: 2016/11/18
-            return info;
-        }*/
         return null;
     }
 
@@ -37,9 +28,9 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo( AuthenticationToken authenticationToken) throws AuthenticationException {
-        String loginName = (String)authenticationToken.getPrincipal();
+        String account = (String)authenticationToken.getPrincipal();
         //查出是否有此用户
-        User user = userMapper.getUserByLoginName(loginName);
+        User user = userMapper.getUserByLoginName(account);
         if(user == null) {
             throw new UnknownAccountException();//没找到帐号
         }
